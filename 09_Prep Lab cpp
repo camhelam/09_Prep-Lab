@@ -1,0 +1,117 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <sstream>
+#include <iomanip>
+
+using namespace std;
+
+class Student {
+public:
+	Student(string name = "not intialized", double GPA = 0.0);
+	void SetName(string studentName);
+	void SetGPA(double personName);
+	string ToString() const;
+	void PrintItem();
+private:
+	string name;
+	double GPA;
+};
+
+Student::Student(string initialName, double initialGPA) {
+	name = initialName;
+	GPA = initialGPA;
+}
+
+void Student::SetName(string inputName) {
+	name = inputName;
+}
+
+void Student::SetGPA(double newGPA) {
+	GPA = newGPA;
+}
+
+//Insert the ToString member function here FIXME**********************************
+string Student::ToString() const {
+   string AllStudentInfo = "";
+   ostringstream StudentInfoOSS;
+   
+   return AllStudentInfo;
+}
+
+void Student::PrintItem() {
+   cout << ": " << this->name << " has a GPA of " << fixed << setprecision(1)
+        << this->GPA << endl;
+   return;
+}
+//**********************************************************************************
+void PrintAllItems(vector<Student*> students) { //FIXME
+   int unsigned i = 0; // Loop index
+   
+   // For each item call class member function to print
+   for (i = 0; i < students.size(); ++i) {
+      cout << i;
+      (*students.at(i)).PrintItem();
+   }
+   return;
+}
+
+
+int main() {
+	vector<Student*> students;
+   
+   Student* newStudent = 0;
+   Student* tmp = 0;
+   
+	//Insert your code for main here
+	int runProgram = 1;
+	string userOption = "";
+	string studentName = "";
+	double studentGPA = 0.0;
+	int listPosition = 0;
+	
+	while (runProgram == 1) {
+	   
+	   cout << "Enter Option: ";
+	   cin >> userOption;
+	   cout << endl;
+	   
+	   if (userOption == "quit") {
+	      runProgram = 0;
+	   }
+	   
+	   if (userOption == "add") {
+	      cout << "Student name: ";
+	      cin >> studentName;
+	      cout << endl;
+	      cout << studentName << "'s GPA: ";
+	      cin >> studentGPA;
+	      cout << endl;
+	      cout << endl;
+	      
+	      newStudent = new Student(studentName, studentGPA);
+         students.push_back(newStudent);
+	   }
+	   
+	   if (userOption == "drop") {
+	      cout << "Index of student to drop: ";
+	      cin >> listPosition;
+	      cout << endl;
+	      cout << endl;
+	    
+	   tmp = students.at(listPosition);
+         delete tmp;
+         students.erase(students.begin() + listPosition);
+	    
+	   }
+	   
+	   if (userOption == "print") {
+	      PrintAllItems(students);//FIXME
+	   }
+	  
+	  
+	   
+	}
+
+	return 0;
+}
